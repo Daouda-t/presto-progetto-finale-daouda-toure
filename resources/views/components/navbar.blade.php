@@ -36,7 +36,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('login') }}">Accedi</a></li>
-                            <li><a class="dropdown-item" href="{{ route('registrati') }}">Registrati</a></li>
+                            <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
                         </ul>    
                    </li>
                     @endauth

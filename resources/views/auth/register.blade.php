@@ -41,7 +41,8 @@
                                     onclick="event.preventDefault(); document.getElementById('form-logout').submit();"
                                     class="dropdown-item">logout</a>
                                 <form action="{{ route('logout') }}" method="POST" style="display: none;" id="form-logout">
-                                    @csrf</form>
+                                    @csrf 
+                                </form>
                           </ul>
                         </il>
                     @else
