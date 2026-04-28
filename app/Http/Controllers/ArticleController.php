@@ -19,6 +19,6 @@ public static function middleware(): array
 
     public function create()
     {
-        return view('articles.create');
+       return view('articles.create');
     }
 }

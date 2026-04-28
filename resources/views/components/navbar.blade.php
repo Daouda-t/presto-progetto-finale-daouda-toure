@@ -12,33 +12,32 @@
                     <li><a class="dropdown-items" href="{{ route('create.article') }}">Crea</a></li>
                 </li>
                 <li class="nav-item">
-                    @auth
-                    <li class="nav-item dropdown">
+                     @auth
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             ciao, {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu">
-                           <a class="dropdown-item" href="#">Action</a>
-                           <a class="dropdown-item" href="#">Another action</a>
+                           
                             <li>
-                            <hr class="dropdown-divider">
-                            </li>
-                             <a class="dropdown-item" href="#">Something else here</a>>/li>
-                            </ul>
-                           </li>
-
-                           @else
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('form-logout').submit();"
+                                    class="dropdown-item">logout</a>
+                                <form action="{{ route('logout') }}" method="POST" style="display: none;" id="form-logout">
+                                    @csrf 
+                                </form>
+                          </ul>
+                        </il>
+                    @else
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             ciao, Utente
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('login') }}">Accedi</a></li>
-                            <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
-                        </ul>    
-                   </li>
+    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+    <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
+</ul>
                     @endauth
              </ul>
            </div>

@@ -9,14 +9,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Article extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'title',
-        'description',
-        'category_id',
-         'price',
-         'user_id'
-    ];
+protected $fillable = [
+    'title',
+    'description',
+    'price',
+    'category_id',
+    'user_id',
+];
         public function user(): BelongsTo
         {
             return $this->belongsTo(User::class);

@@ -12,14 +12,14 @@ use Livewire\Component;
 class CreateArticleForm extends Component
 {
 #[Validate('required|min:5')]
-public $title;
+public  string $title;
 #[Validate('required|min:10')]
-public $description;
+public string $description;
 #[Validate('required|numeric')]
-public $price;
-#[Validate('required')]
-public $category;
-public $article;
+public string $price;
+#[Validate('required|exists:categories,id')]
+public string $category;
+public string $article;
 
 public function save()
 {
@@ -28,8 +28,8 @@ public function save()
     $this->article = Article::create([
         'title' => $this->title,
         'description' => $this->description,
-        'price' => $this->price,
-        'category' => $this->category,
+        'price' => (float) $this->price,
+        'category_id' => $this->category,
         'user_id' => Auth::id(),
     ]);
 

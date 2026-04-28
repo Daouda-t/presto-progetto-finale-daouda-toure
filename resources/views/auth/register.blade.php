@@ -50,14 +50,15 @@
                             aria-expanded="false">
                             Account
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
-                            <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
-                        </ul>
+                     <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+    <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
+</ul>
 
-                  <div class="justify-content-center">
-                    <button type="submit" class="btn btn-dark">Registrati</button>
-                    </div>
+<div class="justify-content-center">
+    <button type="submit" class="btn btn-dark">Registrati</button>
+</div>
+                    @endauth
                 </form>
             </div>
         </div>

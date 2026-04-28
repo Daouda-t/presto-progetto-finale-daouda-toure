@@ -17,7 +17,17 @@ class CategoriesSeeder extends Seeder
         'Mystery',
         'Romance',
         'Science Fiction',
-        'Western'
+        'abbigliamento',
+        'elettronica',
+        'casa',
+        'giardino',
+        'sport',
+        'giocattoli',
+        'automobili',
+        'musica',
+        'film',
+        'libri',
+        'videogiochi'
     ];
     
     public function run(): void
