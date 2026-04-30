@@ -1,4 +1,4 @@
-ciao vorrei anullare incontro con docente o gia risolvato il problema di mysql
-ho installatto phpMyadmin
-poi ho lanciato il comando php artisan migrate
-poi lanciato php artisan serve ho visto che non mi a datto errore
+ho inserito ROUTE login dentro cartela web.php 
+perche sensa questo, login mi da errore 404
+con questo funzione, login non mi da errore
+per queto ho lasciato dentro li nel web.php

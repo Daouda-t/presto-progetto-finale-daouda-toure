@@ -15,7 +15,7 @@
                      @auth
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            ciao, {{ Auth::user()->name }}
+                            ciao, {{ Auth::user()->name}}
                         </a>
                         <ul class="dropdown-menu">
                            

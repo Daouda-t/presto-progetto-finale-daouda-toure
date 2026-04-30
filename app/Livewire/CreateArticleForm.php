@@ -17,7 +17,7 @@ public  string $title;
 public string $description;
 #[Validate('required|numeric')]
 public string $price;
-#[Validate('required|exists:categories,id')]
+#[Validate('required')]
 public string $category;
 public string $article;
 
@@ -29,7 +29,7 @@ public function save()
         'title' => $this->title,
         'description' => $this->description,
         'price' => (float) $this->price,
-        'category_id' => $this->category,
+        'category' => $this->category,
         'user_id' => Auth::id(),
     ]);
 
@@ -40,11 +40,10 @@ public function save()
 
 protected function cleanform()
 {
-  
-   $this->title = '';
-   $this->description = '';
-   $this->price = '';
-   $this->category = '';
+    $this->title = '';
+    $this->description = '';
+    $this->price = '';
+    $this->category = '';
 }
 
     public function render()
