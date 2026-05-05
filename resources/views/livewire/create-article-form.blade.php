@@ -27,19 +27,21 @@
     </div>
 
     <div class="mb-3">
-        <select id="category" wire:model="category" class="form-control @error('category') is-invalid @enderror">
+        <select id="category" wire:model="category_id" class="form-control @error('category_id') is-invalid @enderror">
             <option label disabled>Seleziona una categoria</option>
           @foreach($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach
         </select>
-        @error('category')
+        @error('category_id')
          <p class="fst-italic text-danger">{{ $message }}</p>
             @enderror
     </div>
+
     @if (session()->has('message'))
     <div class="alert alert-success text-center">
         {{ session('message') }}
+    creato con successo il tuo articolo!
     </div>
     @endif
     <div class="d-flex justify-content-center">

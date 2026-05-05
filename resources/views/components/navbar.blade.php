@@ -10,6 +10,8 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route('homepage') }}">Home</a>
                     <li><a class="dropdown-items" href="{{ route('create.article') }}">Crea</a></li>
+
+                </li>
                 </li>
                 <li class="nav-item">
                      @auth
@@ -37,7 +39,9 @@
                         <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
     <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
+ 
 </ul>
+
                     @endauth
              </ul>
            </div>

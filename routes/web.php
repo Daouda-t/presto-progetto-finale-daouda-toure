@@ -8,6 +8,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PublicController::class, 'homepage'])->name('homepage');
 Route::get('/create/Article', [ArticleController::class, 'create'])->name('create.article');
-Route::get('/login', function () {
- return view('auth.login');
-})->name('login');
+//Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+//Route::get('/show/article/{article}', [ArticleController::class, 'show'])->name('article.show');
+//Route::get('/categories/{category}', [ArticleController::class, 'byCategory'])->name('bycategory');
