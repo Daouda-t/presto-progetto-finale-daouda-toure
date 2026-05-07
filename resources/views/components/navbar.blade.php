@@ -19,7 +19,7 @@
                             aria-expanded="false">
                             ciao, {{ Auth::user()->name}}
                         </a>
-                        <ul class="dropdown-menu">
+            <ul class="dropdown-menu">
                            
                             <li>
                                 <a href="{{ route('logout') }}"
@@ -29,6 +29,24 @@
                                     @csrf 
                                 </form>
                           </ul>
+                          <li class="nav-item">
+    <a class="nav-link" aria-current="page" href="{{ route('articles.index') }}">Tutti gli articoli</a>
+</li>
+                          <li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+aria-expanded="false">
+categorie
+</a>
+<ul class="dropdown-menu">
+@foreach ($categories as $category)
+    <li><a class="dropdown-item text-capitalize"
+     href="{{ route('bycategory', ['category' => $category]) }}" >{{$category->name }}</a>
+     </li>
+     @if ($loop->last)
+     <hr class="dropdown-divider">
+     @endif
+@endforeach
+
                         </il>
                     @else
                     <li class="nav-item dropdown">
@@ -39,7 +57,8 @@
                         <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
     <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
- 
+</ul>
+</li>
 </ul>
 
                     @endauth

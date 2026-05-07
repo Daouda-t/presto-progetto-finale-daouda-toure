@@ -19,6 +19,23 @@ public static function middleware(): array
         ];
     }
 
+    public function show(Article $article)
+    {
+        return view('articles.show', compact('article'));
+    }
+
+        public function index()
+        {
+            $articles = Article::orderBy('created_at', 'desc')->paginate(6);
+            return view('articles.index', compact('articles'));
+        }
+
+    public function byCategory(Category $category)
+    {
+        $articles = $category->articles()->get();
+        return view('articles.byCategory', ['articles' => $category->articles, 'category' => $category]);
+    }
+
 
     public function create()
     {

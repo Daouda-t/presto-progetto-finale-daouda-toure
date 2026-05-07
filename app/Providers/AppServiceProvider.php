@@ -31,7 +31,8 @@ class AppServiceProvider extends ServiceProvider
             $categories = Category::all();
             $view->with('categories', $categories);
         });
-    
+             Paginator::useBootstrapFive();
+
 
 }
 }
