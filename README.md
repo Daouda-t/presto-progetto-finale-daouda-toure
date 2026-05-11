@@ -1,0 +1,1 @@
+mida errore su su card non trovi problema

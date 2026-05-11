@@ -25,4 +25,9 @@ protected $fillable = [
         {
             return $this->belongsTo(Category::class);
         }
+       
+
+
+
+
 }

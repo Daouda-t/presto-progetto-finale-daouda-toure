@@ -4,7 +4,7 @@
         <h4 class="card-title">{{ $article->title }}</h4>
         <h6 class="card-text">{{ $article->price }}</h6>
     <div class="d-flex justify-content-bevenly align-items-center mt-5">
-        <a href="{{ route('articles.show', compact('article')) }}" class="btn btn-primary">Dettaglio</a>
+        <a href="{{ route('article.show', compact('article')) }}" class="btn btn-primary">Dettaglio</a>
         <a href="{{route('bycategory', ['category' => $article->category]) }}" 
         class="btn btn-info">{{ $article->category->name }}</a>
     </div>
