@@ -11,10 +11,11 @@
     "require": {
         "php": "^8.3",
         "laravel/fortify": "*",
-        "laravel/framework": "^13.0",
-        "laravel/scout": "*",
+        "laravel/framework": "^12",
+        "laravel/scout": "^10",
         "laravel/tinker": "^3.0",
-        "livewire/livewire": "^3.0@beta"
+        "livewire/livewire": "^3.0@beta",
+        "teamtnt/laravel-scout-tntsearch-driver": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

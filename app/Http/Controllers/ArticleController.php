@@ -36,13 +36,13 @@ public static function middleware(): array
         return view('articles.byCategory', compact('articles', ));
     }
 
-
-     public function searcharticles(Request $request)
+public function searchArticles(Request $request)
     {
         $query = $request->input('query');
         $articles = Article::search($query)->where('is_accepted', true)->paginate(10);
         return view('article.searched', ['articles' => $articles, 'query' => $query]);
     }
+
     public function create()
     {
        return view('articles.create');
