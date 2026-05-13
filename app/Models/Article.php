@@ -17,6 +17,8 @@ protected $fillable = [
     'category_id',
     'user_id'
 ];
+
+
         public function user(): BelongsTo
         {
             return $this->belongsTo(User::class);
@@ -26,8 +28,16 @@ protected $fillable = [
             return $this->belongsTo(Category::class);
         }
        
+public function setAccepted($value)
+{
+    $this->is_accepted = $value;
+    $this->save();
+    return true;
+}
 
-
-
+public static function toBeRevisedcount()
+{
+    return Article::where('is_accepted', null)->count();
+}
 
 }
