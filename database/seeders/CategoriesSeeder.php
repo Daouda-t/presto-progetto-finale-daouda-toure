@@ -27,7 +27,8 @@ class CategoriesSeeder extends Seeder
         'musica',
         'film',
         'libri',
-        'videogiochi'
+        'videogiochi',
+        'moda'
     ];
     
     public function run(): void

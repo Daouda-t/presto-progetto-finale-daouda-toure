@@ -33,7 +33,7 @@ public static function middleware(): array
     public function byCategory(Category $category)
     {
         $articles = $category->articles->where('is_accepted', true);
-        return view('articles.byCategory', compact('articles', 'category'));
+        return view('articles.byCategory', compact('articles', ));
     }
 
 
@@ -42,7 +42,5 @@ public static function middleware(): array
        return view('articles.create');
     }
    
-
-
 
 }
