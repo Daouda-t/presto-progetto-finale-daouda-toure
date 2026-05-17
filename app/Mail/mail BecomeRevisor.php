@@ -5,7 +5,6 @@ namespace App\Mail;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -14,7 +13,7 @@ class BecomeRevisor extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
+    public User $user;
 
     public function __construct(User $user)
     {
@@ -24,7 +23,7 @@ class BecomeRevisor extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: "Rendi Revisor l'utente " . $this->user->name,
+            subject: "Rendi Revisor l'utente {$this->user->name}",
         );
     }
 
@@ -32,6 +31,9 @@ class BecomeRevisor extends Mailable
     {
         return new Content(
             view: 'mail.become-revisor',
+            with: [
+                'user' => $this->user,
+            ],
         );
     }
 

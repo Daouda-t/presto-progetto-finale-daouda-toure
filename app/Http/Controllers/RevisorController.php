@@ -14,36 +14,48 @@ class RevisorController extends Controller
 {
     public function index()
     {
-        $article_to_check = Article::where('is_accepted', null)->first();
+        $article_to_check = Article::whereNull('is_accepted')->first();
+
         return view('revisor.index', compact('article_to_check'));
     }
 
     public function accept(Article $article)
-{
-    $article->setAccepted(true);
+    {
+        $article->setAccepted(true);
 
-    return redirect()
-        ->back()
-        ->with('message', "Hai accettato l'articolo '{$article->title}'");
-}
+        return redirect()
+            ->back()
+            ->with('message', "Hai accettato l'articolo '{$article->title}'");
+    }
 
     public function reject(Article $article)
+    {
+        $article->setAccepted(false);
+
+        return redirect()
+            ->back()
+            ->with('message', "Hai rifiutato l'articolo '{$article->title}'");
+    }
+
+    public function becomeRevisor()
 {
-    $article->setAccepted(false);
+    if (!Auth::check()) {
+        return redirect()->route('login')->with('error', 'Devi effettuare il login.');
+    }
+
+    $user = Auth::user();
+
+    Mail::to('admin@presto.it')->send(new BecomeRevisor($user));
 
     return redirect()
-        ->back()
-        ->with('message', "Hai rifiutato l'articolo '{$article->title}'");
+        ->route('homepage')
+        ->with('message', 'Complimenti, hai richiesto di diventare revisor');
 }
-    public function becomeRevisor()
-    {
-        Mail::to('admin@presto.it')->send(new BecomeRevisor(Auth::user()));
-        return redirect()->route('homepage')->with('message', 'Compliment Hai richiesto di diventare revisor');
-    }
 
     public function makeRevisor(User $user)
     {
-        Artisan::call('app:make-userrevisor', ['email' =>$user->email]);
-        return redirect()->back();
+        Artisan::call('app:make-userrevisor', ['email' => $user->email]);
+
+        return redirect()->back()->with('message', 'Utente promosso a revisor');
     }
 }
