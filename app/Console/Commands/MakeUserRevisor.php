@@ -8,8 +8,6 @@ use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 
 
-#[Signature('app:make-user-revisor')]
-#[Description('Command description')]
 class MakeUserRevisor extends Command
 {
     /**
