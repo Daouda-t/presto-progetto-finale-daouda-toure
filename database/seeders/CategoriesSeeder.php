@@ -15,7 +15,7 @@ class CategoriesSeeder extends Seeder
         'Crime',
         'Historical',
         'Mystery',
-        'Romance',
+        'Servizio',
         'Science Fiction',
         'abbigliamento',
         'elettronica',
@@ -29,6 +29,8 @@ class CategoriesSeeder extends Seeder
         'libri',
         'videogiochi',
         'moda'
+        
+        
     ];
     
     public function run(): void
