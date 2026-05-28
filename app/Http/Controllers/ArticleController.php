@@ -41,7 +41,7 @@ public static function middleware(): array
     {
         $query = $request->input('query');
         $articles = Article::search($query)->where('is_accepted', true)->paginate(10);
-        return view('articles.searched', ['articles' => $articles, 'query' => $query]);
+        return view('article.searched', ['articles' => $articles, 'query' => $query]);
     }
     public function create()
     {

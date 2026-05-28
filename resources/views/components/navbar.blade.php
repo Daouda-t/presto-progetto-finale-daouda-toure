@@ -72,6 +72,13 @@
                                 </form>
                             </li>
                         </ul>
+                        <form class="d-flex" role="search" action="{{ route('article.search') }}" method="GET">
+                        <div class="input-group">
+                        <input type="search"  name="query" class="form-control" placeholder="Search" aria-label="Search">
+                        <button type="submit" class="input-group-text btn btn-outline-success"
+                            id="basic-addon2">Search</button>
+                    </div>
+                    </form>
                     </li>
                 @else
                     <li class="nav-item dropdown">
@@ -83,13 +90,7 @@
                             <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
                             <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
                         </ul>
-                        <form class="d-flex" role="search" action="{{ route('article.search') }}" method="GET">
-                        <div class="input-group">
-                        <input type="search"  name="query" class="form-control" placeholder="Search" aria-label="Search">
-                        <button type="submit" class="input-group-text btn btn-outline-success"
-                            id="basic-addon2">Search</button>
-                    </div>
-                    </form>
+                        
                     </li>
                 @endauth
             </ul>
