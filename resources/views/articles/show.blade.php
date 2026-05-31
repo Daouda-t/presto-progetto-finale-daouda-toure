@@ -36,6 +36,7 @@
 <h5>Descrizione:</h5>
 <p>{{ $article->description }}</p>
 </div>
+  <h1 class="display-1">{{ __('ui.allArticles') }}</h1>
 </div>
 </div>
     </div>

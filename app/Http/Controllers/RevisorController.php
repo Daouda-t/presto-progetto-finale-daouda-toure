@@ -34,11 +34,19 @@ class RevisorController extends Controller
             ->with('message', "Hai rifiutato l'articolo '{$article->title}");
     }
 
-    public function becomeRevisor()
+     public function becomeRevisor()
 {
-   Mail::to('admin@presto.it')->send(new BecomeRevisor(Auth::user()));
-        return redirect()->route('homepage')->with('message', 'Complimenti, hai richiesto di diventare revisor');
+    try {
+        Mail::to('admin@presto.it')->send(new BecomeRevisor(Auth::user()));
+        return redirect()->route('homepage')
+            ->with('message', 'Complimenti, hai richiesto di diventare revisor');
+    } catch (\Throwable $e) {
+        report($e);
+
+        return redirect()->route('homepage')
+            ->with('error', 'Richiesta inviata, ma non è stato possibile spedire l’email');
     }
+}
 
 
     public function makeRevisor(User $user)

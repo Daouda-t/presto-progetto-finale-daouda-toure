@@ -1,0 +1,1 @@
+{{__("ui.$category->name")}}

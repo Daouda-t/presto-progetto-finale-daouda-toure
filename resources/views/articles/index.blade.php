@@ -22,6 +22,8 @@
 <div class="d-flex justify-content-center">
 <div>
     {{ $articles->links() }}
+
 </div>
+
 </div>
 </x-layout>
