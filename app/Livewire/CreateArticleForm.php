@@ -5,46 +5,85 @@ namespace App\Livewire;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateArticleForm extends Component
 {
-#[Validate('required|min:5')]
-public  string $title;
-#[Validate('required|min:10')]
-public string $description;
-#[Validate('required|numeric')]
-public string $price;
-#[Validate('required')]
-public string $category_id;
-public string $article;
+    use WithFileUploads;
 
-public function save()
-{
-    $this->validate();
+    #[Validate('required|min:5')]
+    public string $title = '';
 
-    $this->article = Article::create([
-        'title' => $this->title,
-        'description' => $this->description,
-        'price' => (float) $this->price,
-         'category_id' => $this->category_id,
-        'user_id' => Auth::id(),
-    ]);
+    #[Validate('required|min:10')]
+    public string $description = '';
 
-    Session::flash('success', 'Article created successfully!');
+    #[Validate('required|numeric')]
+    public string $price = '';
 
-    $this->cleanform();
-}
+    #[Validate('required|exists:categories,id')]
+    public string $category_id = '';
 
-protected function cleanform()
-{
-    $this->title = '';
-    $this->description = '';
-    $this->price = '';
-    $this->category_id = ''; 
-}
+    public ?Article $article = null;
+
+    public array $images = [];
+    public array $temporary_images = [];
+
+    public function updatedTemporaryImages(): void
+    {
+        $this->validate([
+            'temporary_images' => 'array|max:6',
+            'temporary_images.*' => 'image|max:1024',
+        ]);
+
+        foreach ($this->temporary_images as $image) {
+            $this->images[] = $image;
+        }
+    }
+
+    public function removeImage(int $key): void
+    {
+        unset($this->images[$key]);
+        $this->images = array_values($this->images);
+    }
+
+    public function save(): void
+    {
+        $this->validate();
+
+        $this->article = Article::create([
+            'title' => $this->title,
+            'description' => $this->description,
+            'price' => (float) $this->price,
+            'category_id' => (int) $this->category_id,
+            'user_id' => Auth::id(),
+        ]);
+
+        foreach ($this->images as $image) {
+            $this->article->images()->create([
+                'path' => $image->store('images', 'public'),
+            ]);
+        }
+
+        session()->flash('success', 'Article created successfully!');
+
+        $this->cleanForm();
+    }
+
+    protected function cleanForm(): void
+    {
+        $this->reset([
+           $this->title = '',
+           $this->description = '',
+           $this->price = '',
+           $this->category_id = '',
+           $this->images = [],
+            
+        ]);
+
+        $this->resetValidation();
+    }
 
     public function render()
     {
