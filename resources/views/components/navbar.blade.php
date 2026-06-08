@@ -22,7 +22,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('articles.index') }}">Tutti gli articoli</a>
+                    <a class="nav-link" href="{{ route('articles.index') }}">{{ __('ui.allArticles') }}</a>
                 </li>
 
                 <li class="nav-item dropdown">

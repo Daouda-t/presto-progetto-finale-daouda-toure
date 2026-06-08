@@ -71,19 +71,15 @@ class CreateArticleForm extends Component
         $this->cleanForm();
     }
 
-    protected function cleanForm(): void
-    {
-        $this->reset([
-           $this->title = '',
-           $this->description = '',
-           $this->price = '',
-           $this->category_id = '',
-           $this->images = [],
-            
-        ]);
-
-        $this->resetValidation();
-    }
+    protected function cleanForm(): void 
+    { 
+        $this->title = ''; 
+        $this->description = ''; 
+        $this->price = ''; 
+        $this->category_id = ''; 
+        $this->images = []; 
+        $this->resetValidation(); 
+        }
 
     public function render()
     {
