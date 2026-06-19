@@ -31,16 +31,11 @@ class CreateArticleForm extends Component
     public array $temporary_images = [];
 
     public function updatedTemporaryImages(): void
-    {
-        $this->validate([
-            'temporary_images' => 'array|max:6',
-            'temporary_images.*' => 'image|max:1024',
-        ]);
-
-        foreach ($this->temporary_images as $image) {
-            $this->images[] = $image;
-        }
-    }
+     {
+         $this->validate([ 'temporary_images' => 'array', 'temporary_images.*' => 'image|max:1024', ]); 
+         foreach ($this->temporary_images as $image) { if (count($this->images) >= 6) { break; } 
+    $this->images[] = $image; } $this->temporary_images = [];
+     }
 
     public function removeImage(int $key): void
     {
@@ -48,38 +43,34 @@ class CreateArticleForm extends Component
         $this->images = array_values($this->images);
     }
 
-    public function save(): void
-    {
+    public function save(): void 
+    { 
         $this->validate();
+         $this->validate([ 'images' => 'array|max:6', 'images.*' => 'image|max:1024', ]);
+          $this->article = Article::create([ 
+            'title' => $this->title, 
+            'description' => $this->description, 
+            'price' => (float) $this->price, 
+            'category_id' => (int) $this->category_id, 
+            'user_id' => Auth::id(), 
+            ]); 
+            foreach ($this->images as $image)
+                 { $this->article->images()->create([ 'path' => $image->store('images', 'public'), ]);
+             } session()->flash('success', 'Article created successfully!'); 
+             $this->cleanForm(); 
 
-        $this->article = Article::create([
-            'title' => $this->title,
-            'description' => $this->description,
-            'price' => (float) $this->price,
-            'category_id' => (int) $this->category_id,
-            'user_id' => Auth::id(),
-        ]);
-
-        foreach ($this->images as $image) {
-            $this->article->images()->create([
-                'path' => $image->store('images', 'public'),
-            ]);
-        }
-
-        session()->flash('success', 'Article created successfully!');
-
-        $this->cleanForm();
-    }
+             }
 
     protected function cleanForm(): void 
-    { 
-        $this->title = ''; 
-        $this->description = ''; 
-        $this->price = ''; 
-        $this->category_id = ''; 
-        $this->images = []; 
-        $this->resetValidation(); 
-        }
+    {
+         $this->title = '';
+          $this->description = '';
+           $this->price = '';
+            $this->category_id = '';
+             $this->images = [];
+              $this->temporary_images = [];
+               $this->resetValidation();
+                }
 
     public function render()
     {
