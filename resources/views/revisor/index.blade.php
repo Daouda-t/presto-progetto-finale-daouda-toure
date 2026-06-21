@@ -86,5 +86,63 @@
                 </div>
             </div>
         @endif
+
+        @foreach ($article_to_check->images as $key => $image)
+        <div class="col-6">
+         <div class="card-mb-3">
+            <div class="row g-0">
+             <div class="col-mb-4">
+                 <img src="{{ $image->getUrl(300, 300) }}"
+                  alt="immagine {{ $key + 1 }} Dell'articolo '{{ $article_to_check }}'">
+                 </div>
+                    <div class="col-md-5 ps-3">
+                    <div class="card-body">
+                      <h5>labels</h5>
+                         @if ($image->labels)
+                           @Foreach ($image->labels as $label)
+                              #{{ $label }},
+                                 @endforeach
+                                     @else
+                                 <p class="frt-italic">No labels</p>    
+                           @endif
+                    </div>
+                    </div>
+                 <div class="col-md-3">
+                 <div class="card-body">
+                   <h5 class="">Ratings</h5>
+                   <div class="row justify-content-center">
+                   <div class="col-2">
+                      <div class="text-center mx-auto {{ $image->adult }}"> 
+                      </div>
+                     </div>
+                    <div class="col-10">adult</div>
+                   </div>
+                <div class="row justify-content-center">
+                <div class="col-2">
+                <div class="text-center mx-auto {{ $image->spoof }}">
+                </div>
+                </div>
+                    <div class="col-10">spoof</div>  
+                    </div>
+                  <div class="row justify-content-center">
+                   <div class="col-2">
+                       <div class="text-center mx-auto {{ $image->racy }}">
+                       </div>
+                   </div>
+                         <div class="col-10">racy</div>
+                  </div>
+                  <div class="row justify-content-center">
+                     <div class="col-2">
+                    <div class="text-center mx-auto {{ $image->medical }}">
+                    </div>
+                     </div>
+                        <div class="col-10">medical</div>
+                  </div>  
+                 </div>
+              </div>
+             </div>
+         </div>
+        </div>
+        @endforeach
     </div>
 </x-layout>
