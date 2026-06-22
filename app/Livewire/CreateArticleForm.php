@@ -47,10 +47,9 @@ class CreateArticleForm extends Component
         $this->images = array_values($this->images);
     }
 
-    public function save(): void 
+    public function store()
     { 
         $this->validate();
-         $this->validate([ 'images' => 'array|max:6', 'images.*' => 'image|max:1024', ]);
           $this->article = Article::create([ 
             'title' => $this->title, 
             'description' => $this->description, 
@@ -60,10 +59,9 @@ class CreateArticleForm extends Component
             ]); 
             if (count($this->images) > 0) {
                 foreach ($this->images as $image) {
-                    $newFileName= "articles/{$this->article->id}";
+                    $newFileName = "articles/{$this->article->id}";
                     $newImage = $this->article->image()->create([
-                        'path' => $image->store($newFileName, 'public')
-                    ]);
+                        'path' => $image->store($newFileName, 'public')]);
                     dispatch(new ResizeImage($newImage->path, 300, 300));
                     dispatch(new GoogleVisionSafeSearch($newImage->id));
                     dispatch(new GoogleVisionLabelImage($newImage->id));

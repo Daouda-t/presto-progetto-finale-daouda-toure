@@ -87,13 +87,13 @@
             </div>
         @endif
 
-        @foreach ($article_to_check->images as $key => $image)
+        @foreach ($article_to_check->images as $key=>$image)
         <div class="col-6">
          <div class="card-mb-3">
             <div class="row g-0">
              <div class="col-mb-4">
                  <img src="{{ $image->getUrl(300, 300) }}"
-                  alt="immagine {{ $key + 1 }} Dell'articolo '{{ $article_to_check }}'">
+                 class="img-fluid rounded-start"  alt="immagine {{ $key + 1 }} Dell'articolo '{{ $article_to_check->title }}'">
                  </div>
                     <div class="col-md-5 ps-3">
                     <div class="card-body">
@@ -116,6 +116,13 @@
                       </div>
                      </div>
                     <div class="col-10">adult</div>
+                   </div>
+                   <div class="row justify-content-center">
+                   <div class="col-2">
+                      <div class="text-center mx-auto {{ $image->violence }}"> 
+                      </div>
+                     </div>
+                    <div class="col-10">violence</div>
                    </div>
                 <div class="row justify-content-center">
                 <div class="col-2">
