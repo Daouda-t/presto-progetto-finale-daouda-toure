@@ -4,88 +4,37 @@ namespace App\Jobs;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Spatie\Image\Enums\CropPosition;
+use  Spatie\Image\Image;
 
 class ResizeImage implements ShouldQueue
 {
     use Queueable;
 
-    private string $path;
-    private int $width;
-    private int $height;
-
-    public function __construct(string $path, int $width, int $height)
+    /**
+     * Create a new job instance.
+     */
+    private $w, $h, $fileName, $path;
+    public function __construct($filePath, $w, $h)
     {
-        $this->path = $path;
-        $this->width = $width;
-        $this->height = $height;
+        $this->path = dirname($filePath);
+        $this->fileName = basename($filePath);
+        $this->w = $w;
+        $this->h = $h;
     }
 
+    /**
+     * Execute the job.
+     */
     public function handle(): void
     {
-        $filePath = storage_path('app/public/' . $this->path);
+        $w = $this->w;
+        $h = $this->h;
+        $srcPath = storage_path() . '/app/public/' . $this->path . '/' . $this->fileName;
+        $destPath = storage_path() . '/app/public/' . $this->path . "/crop_{$w}x{$h}_" . $this->fileName;
 
-        if (!file_exists($filePath)) {
-            return;
-        }
-
-        $imageInfo = getimagesize($filePath);
-        if (!$imageInfo) {
-            return;
-        }
-
-        [$originalWidth, $originalHeight, $imageType] = $imageInfo;
-
-        switch ($imageType) {
-            case IMAGETYPE_JPEG:
-                $source = imagecreatefromjpeg($filePath);
-                break;
-            case IMAGETYPE_PNG:
-                $source = imagecreatefrompng($filePath);
-                break;
-            case IMAGETYPE_GIF:
-                $source = imagecreatefromgif($filePath);
-                break;
-            default:
-                return;
-        }
-
-        if (!$source) {
-            return;
-        }
-
-        $destination = imagecreatetruecolor($this->width, $this->height);
-
-        if ($imageType === IMAGETYPE_PNG || $imageType === IMAGETYPE_GIF) {
-            imagealphablending($destination, false);
-            imagesavealpha($destination, true);
-        }
-
-        imagecopyresampled(
-            $destination,
-            $source,
-            0,
-            0,
-            0,
-            0,
-            $this->width,
-            $this->height,
-            $originalWidth,
-            $originalHeight
-        );
-
-        switch ($imageType) {
-            case IMAGETYPE_JPEG:
-                imagejpeg($destination, $filePath, 90);
-                break;
-            case IMAGETYPE_PNG:
-                imagepng($destination, $filePath);
-                break;
-            case IMAGETYPE_GIF:
-                imagegif($destination, $filePath);
-                break;
-        }
-
-        imagedestroy($source);
-        imagedestroy($destination);
+        Image::load($srcPath)
+        ->crop($w, $h, CropPosition::Center)
+        ->save($destPath);
     }
 }

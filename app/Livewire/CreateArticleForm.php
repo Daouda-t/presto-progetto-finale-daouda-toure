@@ -38,8 +38,10 @@ class CreateArticleForm extends Component
     public function updatedTemporaryImages(): void
      {
          $this->validate([ 'temporary_images' => 'array', 'temporary_images.*' => 'image|max:1024', ]); 
-         foreach ($this->temporary_images as $image) { if (count($this->images) >= 6) { break; } 
-    $this->images[] = $image; } $this->temporary_images = [];
+         foreach ($this->temporary_images as $image) {
+             if (count($this->images) >= 6) { break; } 
+    $this->images[] = $image; } 
+    $this->temporary_images = [];
      }
 
     public function removeImage(int $key): void
@@ -54,9 +56,11 @@ class CreateArticleForm extends Component
           $this->article = Article::create([ 
             'title' => $this->title, 
             'description' => $this->description, 
-            'price' => (float) $this->price, 
-            'category_id' => (int) $this->category_id, 
-            'user_id' => Auth::id(), 
+            'price' => $this->price, 
+            'category_id' =>  $this->category, 
+            'user_id' => Auth::id()
+
+            
             ]); 
             if (count($this->images) > 0) {
                 foreach ($this->images as $image) {
