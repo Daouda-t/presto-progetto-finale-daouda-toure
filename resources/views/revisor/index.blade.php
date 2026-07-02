@@ -16,10 +16,10 @@
                 <div class="col-12 col-lg-8">
                     <div class="row g-3">
                         @if ($article_to_check->images->count())
-                            @foreach ($article->images as $key => $image)
-                                <div class="carousel-item @if ($loop->first) active @endif">
-                                    <img src="{{ $image->getFullUrl(300, 300) }}" class="d-block w-100 rounded shadow"
-                                     alt="Immagine {{ $key + 1 }} dell'articolo {{ $article->title }}">
+                            @foreach ($article_to_check->images as $key => $image)
+                                <div class="col-6 col-md-4 mb-4 text-center">
+                                    <img src="{{ $image->getFullUrl(300, 300) }}" class="img-fluid rounded shadow"
+                                     alt="Immagine {{ $key + 1 }} dell'articolo {{ $article_to_check->title }}">
                                 </div>
                             @endforeach
                         @else

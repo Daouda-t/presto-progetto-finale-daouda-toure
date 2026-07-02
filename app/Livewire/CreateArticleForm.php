@@ -67,8 +67,9 @@ class CreateArticleForm extends Component
                     $newFileName = "articles/{$this->article->id}";
                     $newImage = $this->article->image()->create([
                         'path' => $image->store($newFileName, 'public')]);
-                        //1vecchio codice:
-                   // dispatch(new ResizeImage($newImage->path, 300, 300));
+                       
+                 dispatch(new ResizeImage($newImage->path, 300, 300));
+                  //1vecchio codice:
                     //dispatch(new GoogleVisionSafeSearch($newImage->id));
                     //dispatch(new GoogleVisionLabelImage($newImage->id));
                     //!nuovo codice:

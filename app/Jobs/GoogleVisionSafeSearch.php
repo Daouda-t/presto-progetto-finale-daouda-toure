@@ -41,12 +41,12 @@ class GoogleVisionSafeSearch implements ShouldQueue
         $google_image = new VisionImage([
             'content' => $image]);
 
-            $google_factures = new facture();
-            $google_factures->setType(Type::SAFE_SEARCH_DETECTION);
+            $googlefactures = new facture();
+            $googlefactures->setType(Type::SAFE_SEARCH_DETECTION);
 
             $request = new AnnotateImageRequest();
             $request->setImage($google_image);
-            $request->setFeatures([$google_factures]);
+            $request->setFeatures([$googlefactures]);
 
             $batchRequest = new BatchAnnotateImagesRequest();
             $batchRequest->setRequests([$request]);

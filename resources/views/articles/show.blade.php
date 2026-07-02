@@ -12,12 +12,11 @@
             <div class="col-12 col-md-6 mb-3">
                 @if ($article->images->count() > 0)
                     <div id="carouselExample" class="carousel slide">
-                        <div class="carousel-inner"
+                        <div class="carousel-inner">
                             @foreach ($article->images as $key => $image)
                                 <div class="carousel-item @if ($loop->first) active @endif">
                                     <img src="{{ $image->getFullUrl(300, 300) }}" class="d-block w-100 rounded shadow"
-                                        alt="Immagine {{ $key + 1 }} dell'articolo {{ $article->title }}"
-                                    >
+                                        alt="Immagine {{ $key + 1 }} dell'articolo {{ $article->title }}">
                                 </div>
                             @endforeach
                         </div>
@@ -38,8 +37,7 @@
                     <img
                         src="https://picsum.photos/300"
                         class="d-block w-100 rounded shadow"
-                        alt="Nessuna foto inserita dall'utente"
-                    >
+                        alt="Nessuna foto inserita dall'utente">
                 @endif
             </div>
 

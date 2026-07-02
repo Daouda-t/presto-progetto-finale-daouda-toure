@@ -3,3 +3,4 @@
 !public/
 !.gitignore
 /storage/*.index
+google_credential.json
