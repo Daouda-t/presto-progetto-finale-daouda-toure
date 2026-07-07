@@ -50,14 +50,14 @@ class CreateArticleForm extends Component
         $this->images = array_values($this->images);
     }
 
-    public function store()
+    public function save()
     { 
         $this->validate();
           $this->article = Article::create([ 
             'title' => $this->title, 
             'description' => $this->description, 
             'price' => $this->price, 
-            'category_id' =>  $this->category, 
+            'category_id' =>  $this->category_id, 
             'user_id' => Auth::id()
 
             
@@ -65,7 +65,7 @@ class CreateArticleForm extends Component
             if (count($this->images) > 0) {
                 foreach ($this->images as $image) {
                     $newFileName = "articles/{$this->article->id}";
-                    $newImage = $this->article->image()->create([
+                    $newImage = $this->article->images()->create([
                         'path' => $image->store($newFileName, 'public')]);
                        
                  dispatch(new ResizeImage($newImage->path, 300, 300));
