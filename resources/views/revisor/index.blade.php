@@ -85,7 +85,8 @@
                     {{ session('message') }}
                 </div>
             </div>
-        
+        @endif
+
 @if ($article_to_check)
         @foreach ($article_to_check->images as $key=>$image)
         <div class="col-6">
