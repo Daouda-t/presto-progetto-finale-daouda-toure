@@ -9,7 +9,7 @@ use Google\Cloud\Vision\V1\AnnotateImageRequest;
 use Google\Cloud\Vision\V1\BatchAnnotateImagesRequest;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use Google\Cloud\Vision\V1\Feature as facture;
+use Google\Cloud\Vision\V1\Feature;
 use Google\Cloud\Vision\V1\Feature\Type;
 
 class GoogleVisionLabelImage implements ShouldQueue
@@ -39,15 +39,17 @@ class GoogleVisionLabelImage implements ShouldQueue
         putenv('GOOGLE_APPLICATION_CREDENTIALS=' .base_path('google_credential.json'));
 
          $googleVisionClient = new ImageAnnotatorClient();
-        $google_image = new VisionImage([
-            'content' => $image]);
 
-            $googlefactures = new facture();
-            $googlefactures->setType(Type::SAFE_SEARCH_DETECTION);
+        $google_image = new VisionImage([
+            'content' => $image,
+            ]);
+
+            $googlefeatures = new Feature();
+            $googlefeatures->setType(Type::LABEL_DETECTION);
 
             $request = new AnnotateImageRequest();
             $request->setImage($google_image);
-            $request->setFeatures([$googlefactures]);
+            $request->setFeatures([$googlefeatures]);
 
             $batchRequest = new BatchAnnotateImagesRequest();
             $batchRequest->setRequests([$request]);
@@ -55,13 +57,19 @@ class GoogleVisionLabelImage implements ShouldQueue
             $responseBatch = $googleVisionClient->batchAnnotateImages($batchRequest);
             $response = $responseBatch->getResponses()[0];
 
+            $responseBatch = $googleVisionClient->batchAnnotateImages($batchRequest);
+
+            $response = $responseBatch->getResponses()[0];
+
             $labels = $response->getlabelAnnotations();
 
-            if($labels){
+            if($labels) {
                 $result = [];
-                foreach($labels as $label){
+
+                foreach($labels as $label) {
                     $result[] = $label->getDescription();
                 }
+                
                 $i->$labels = $result;
                 $i->save();
             }

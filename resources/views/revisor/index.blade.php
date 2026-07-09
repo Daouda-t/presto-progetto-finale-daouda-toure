@@ -19,7 +19,7 @@
                             @foreach ($article_to_check->images as $key => $image)
                                 <div class="col-6 col-md-4 mb-4 text-center">
                                     <img src="{{ $image->getUrl(300, 300) }}" class="img-fluid rounded shadow"
-                                     alt="Immagine {{ $key + 1 }} dell'articolo '{{ $article_to_check->title }}">
+                                     alt="Immagine {{ $key + 1 }} dell'articolo {{ $article_to_check->title }}">
                                 </div>
                             @endforeach
                         @else
@@ -85,8 +85,8 @@
                     {{ session('message') }}
                 </div>
             </div>
-        @endif
-
+        
+@if ($article_to_check)
         @foreach ($article_to_check->images as $key=>$image)
         <div class="col-6">
          <div class="card-mb-3">
@@ -151,5 +151,6 @@
          </div>
         </div>
         @endforeach
+    @endif
     </div>
 </x-layout>
