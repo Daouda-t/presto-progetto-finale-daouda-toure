@@ -30,6 +30,7 @@
                                         alt="Immagine segnaposto"
                                         class="img-fluid rounded shadow"
                                     >
+
                                 </div>
                             @endfor
                         @endif
