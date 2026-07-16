@@ -28,7 +28,8 @@ class CategoriesSeeder extends Seeder
         'film',
         'libri',
         'videogiochi',
-        'moda'
+        'moda',
+        'mobile'
         
         
     ];
@@ -39,7 +40,10 @@ class CategoriesSeeder extends Seeder
             Category::create([
                 'name' => $category
             ]);
+            
         }
     
     }
+    
 }
+
